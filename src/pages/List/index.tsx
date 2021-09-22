@@ -20,7 +20,7 @@ const List: React.FC = () => {
         <SelectInput options={options} />
       </ContentHeader>
       <Content>
-        <HistoryFinanceCard 
+        <HistoryFinanceCard
           cardColor="#313862"
           tagColor="#e44c4e"
           title="Conta de Luz"
