@@ -43,6 +43,11 @@ const List: React.FC<IRouteParams> = ({ match }) => {
     String(new Date().getFullYear())
   );
 
+  const [selectedFrequency, setSelectedFrequency] = useState([
+    "recorrente",
+    "eventual",
+  ]);
+
   const { type } = match.params;
 
   const title = useMemo(() => {
@@ -59,17 +64,16 @@ const List: React.FC<IRouteParams> = ({ match }) => {
 
   const years = useMemo(() => {
     let uniqueYears: number[] = [];
-    
+
     listData.forEach((item) => {
       const date = new Date(item.date);
       const year = date.getFullYear();
-
 
       if (!uniqueYears.includes(year)) {
         uniqueYears.push(year);
       }
     });
-    
+
     return uniqueYears.map((year) => {
       return {
         value: year,
@@ -77,7 +81,6 @@ const List: React.FC<IRouteParams> = ({ match }) => {
       };
     });
   }, [listData]);
-
 
   const months = useMemo(() => {
     return listOfMonths.map((month, index) => {
@@ -88,13 +91,26 @@ const List: React.FC<IRouteParams> = ({ match }) => {
     });
   }, []);
 
+  const handleFrequencyClick = (frequency: string) => {
+    const alreadySelected = selectedFrequency.findIndex(
+      (item) => item === frequency
+    );
+
+    if (alreadySelected >= 0) {
+      const filtered = selectedFrequency.filter((item) => item !== frequency);
+      setSelectedFrequency(filtered);
+    } else {
+      setSelectedFrequency((prev) => [...prev, frequency]);
+    }
+  };
+
   useEffect(() => {
     const filteredDate = listData.filter((item) => {
       const date = new Date(item.date);
       const month = String(date.getMonth() + 1);
       const year = String(date.getFullYear());
-      
-      return month === monthSelected && year === yearSelected;
+
+      return month === monthSelected && year === yearSelected && selectedFrequency.includes(item.frequency);
     });
 
     const formattedData = filteredDate.map((item) => {
@@ -109,7 +125,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
     });
 
     setData(formattedData);
-  }, [listData, monthSelected, yearSelected, data.length]);
+  }, [listData, monthSelected, yearSelected, data.length, selectedFrequency]);
   return (
     <Container>
       <ContentHeader title={title} lineColor={lineColor}>
@@ -126,10 +142,22 @@ const List: React.FC<IRouteParams> = ({ match }) => {
       </ContentHeader>
 
       <Filters>
-        <button type="button" className="tag-filter tag-filter-recurrent">
+        <button
+          type="button"
+          className={`tag-filter tag-filter-recurrent ${
+            selectedFrequency.includes("recorrente") && "tag-actived"
+          }`}
+          onClick={() => handleFrequencyClick("recorrente")}
+        >
           Recorrentes
         </button>
-        <button type="button" className="tag-filter tag-filter-eventual">
+        <button
+          type="button"
+          className={`tag-filter tag-filter-eventual ${
+            selectedFrequency.includes("eventual") && "tag-actived"
+          }`}
+          onClick={() => handleFrequencyClick("eventual")}
+        >
           Eventuais
         </button>
       </Filters>
