@@ -5,7 +5,7 @@ export default [
   { "description": "Plano de Saúde", "amount": "300.00", "type": "saída", "frequency": "recorrente", "date": "2020-01-23" },
   { "description": "Compras do mês", "amount": "625.78", "type": "saída", "frequency": "recorrente", "date": "2020-01-23" },
   { "description": "Lanche", "amount": "45.70", "type": "saída", "frequency": "eventual", "date": "2020-01-23" },
-  { "description": "Blusa", "amount": "95.70", "type": "saída", "frequency": "eventual", "date": "2020-01-23" },
+  { "description": "Blusa", "amount": "95.70", "type": "saída", "frequency": "eventual", "date": "2021-01-23" },
   { "description": "Energia elétrica", "amount": "125.55", "type": "saída", "frequency": "recorrente", "date": "2020-02-10" },
   { "description": "Água", "amount": "90.15", "type": "saída", "frequency": "recorrente", "date": "2020-02-15" },
   { "description": "Telefone", "amount": "99.99", "type": "saída", "frequency": "recorrente", "date": "2020-02-23" },
