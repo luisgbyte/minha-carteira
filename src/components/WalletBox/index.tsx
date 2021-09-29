@@ -42,7 +42,7 @@ const WalletBox: React.FC<IWalletBoxProps> = ({
         <CountUp
           end={amount}
           prefix={"R$ "}
-          duration={3}
+          duration={1}
           separator="."
           decimal=","
           decimals={2}
