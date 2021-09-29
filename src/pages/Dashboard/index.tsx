@@ -2,13 +2,13 @@ import React, { useState, useMemo } from "react";
 
 import ContentHeader from "../../components/ContentHeader";
 import SelectInput from "../../components/SelectInput";
+import WalletBox from "../../components/WalletBox";
 
 import expenses from "../../repositories/expenses";
 import gains from "../../repositories/gains";
-import { Container } from "./styles";
-
 import listOfMonths from "../../utils/months";
 
+import { Container, Content } from "./styles";
 
 const Dashboard: React.FC = () => {
   const [monthSelected, setMonthSelected] = useState<number>(
@@ -18,7 +18,7 @@ const Dashboard: React.FC = () => {
   const [yearSelected, setYearSelected] = useState<number>(
     new Date().getFullYear()
   );
-  
+
   const years = useMemo(() => {
     let uniqueYears: number[] = [];
 
@@ -80,6 +80,30 @@ const Dashboard: React.FC = () => {
           onChange={(e) => handleYearSelected(e.target.value)}
         />
       </ContentHeader>
+
+      <Content>
+        <WalletBox
+          title="saldo"
+          color="#4e41f0"
+          amount={150.00}
+          footerlabel="atualizado com base nas estradas e saídas"
+          icon="dollar"
+        />
+        <WalletBox
+          title="entradas"
+          color="#f7931b"
+          amount={5000.00}
+          footerlabel="atualizado com base nas estradas e saídas"
+          icon="arrowUp"
+        />
+        <WalletBox
+          title="saídas"
+          color="#e44c4e"
+          amount={4850.00}
+          footerlabel="atualizado com base nas estradas e saídas"
+          icon="arrowDown"
+        />
+      </Content>
     </Container>
   );
 };
