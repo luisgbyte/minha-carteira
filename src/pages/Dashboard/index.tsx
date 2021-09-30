@@ -5,6 +5,7 @@ import SelectInput from "../../components/SelectInput";
 import WalletBox from "../../components/WalletBox";
 import MessageBox from "../../components/MessageBox";
 import PieChartBox from "../../components/PieChartBox";
+import HistoryBox from "../../components/HistoryBox";
 
 import expenses from "../../repositories/expenses";
 import gains from "../../repositories/gains";
@@ -124,8 +125,8 @@ const Dashboard: React.FC = () => {
   }, [totalBalance]);
 
   const relationExpensesVersusGains = useMemo(() => {
-    const total = totalGains + totalExpenses; 
-  
+    const total = totalGains + totalExpenses;
+
     const percentGains = (totalGains / total) * 100;
     const percentExpenses = (totalExpenses / total) * 100;
 
@@ -134,18 +135,75 @@ const Dashboard: React.FC = () => {
         name: "Entradas",
         value: totalExpenses,
         percent: Number(percentGains.toFixed(1)),
-        color: '#e44c4e'
+        color: "#e44c4e",
       },
       {
         name: "Saídas",
         value: totalExpenses,
         percent: Number(percentExpenses.toFixed(1)),
-        color: '#f7931b'
-      }
+        color: "#f7931b",
+      },
     ];
 
     return data;
-  },[totalGains, totalExpenses]);
+  }, [totalGains, totalExpenses]);
+
+  const historyData = useMemo(() => {
+    return listOfMonths
+      .map((_, month) => {
+        let amountEntry = 0;
+
+        gains.forEach((gain) => {
+          const date = new Date(gain.date);
+          const gainMonth = date.getMonth();
+          const gainYear = date.getFullYear();
+
+          if (gainMonth === month && gainYear === yearSelected) {
+            try {
+              amountEntry += Number(gain.amount);
+            } catch {
+              throw new Error(
+                "amountEntry is invalid. amountEntry must be valid number."
+              );
+            }
+          }
+        });
+
+        let amountOutput = 0;
+
+        expenses.forEach((expense) => {
+          const date = new Date(expense.date);
+          const expenseMonth = date.getMonth();
+          const expenseYear = date.getFullYear();
+
+          if (expenseMonth === month && expenseYear === yearSelected) {
+            try {
+              amountOutput += Number(expense.amount);
+            } catch {
+              throw new Error(
+                "amountOutput is invalid. amountOutput must be valid number."
+              );
+            }
+          }
+        });
+
+        return {
+          monthNumber: month,
+          month: listOfMonths[month].substr(0, 3),
+          amountEntry,
+          amountOutput,
+        };
+      })
+      .filter((item) => {
+        const currentMonth = new Date().getMonth();
+        const currentYear = new Date().getFullYear();
+
+        return (
+          (yearSelected === currentYear && item.monthNumber <= currentMonth) ||
+          yearSelected < currentYear
+        );
+      });
+  }, [yearSelected]);
 
   const handleMonthSelected = (month: string) => {
     try {
@@ -211,7 +269,11 @@ const Dashboard: React.FC = () => {
         />
 
         <PieChartBox data={relationExpensesVersusGains} />
-        
+        <HistoryBox
+          data={historyData}
+          lineColorAmountEntry="#f7931b"
+          lineColorAmountOutput="#e44c4e"
+        />
       </Content>
     </Container>
   );
