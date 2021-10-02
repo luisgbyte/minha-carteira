@@ -3,18 +3,19 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 import GlobalStyles from "./styles/GlobalStyles";
 
-// import Layout from "./components/Layout";
-import dark from "./styles/themes/dark";
+import { useTheme } from "./hooks/theme";
 
 import Routes from "./routes";
+import dark from "./styles/themes/dark";
 
 const src: React.FC = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { theme } = useTheme();
+
   return (
-    <ThemeProvider theme={dark}>
+    <ThemeProvider theme={theme}>
       <GlobalStyles />
-      {/* <Layout> */}
-        <Routes/>
-      {/* </Layout> */}
+      <Routes />
     </ThemeProvider>
   );
 };
