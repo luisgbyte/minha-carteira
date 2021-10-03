@@ -3,6 +3,7 @@ import React from "react";
 import logoImg from "../../assets/Logo.svg";
 
 import Input from "../../components/Input";
+import Button from "../../components/Button";
 
 import { Container, Logo, Form, FormTitle } from "./styles";
 
@@ -20,7 +21,7 @@ const SignIn: React.FC = () => {
         <Input type="email" required placeholder="e-mail" />
         <Input type="password" required placeholder="senha" />
 
-        <button type="submit">Acessar</button>
+        <Button type="submit">Acessar</Button>
       </Form>
     </Container>
   );
