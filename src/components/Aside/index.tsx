@@ -25,7 +25,7 @@ const Aside: React.FC = () => {
   const { signOut } = useAuth();
 
   return (
-    <Container>
+    <Container menuIsOpen={true}>
       <Header>
         <LogoImg src={logoImg} alt="Logo minha carteira" />
         <Title>Minha Carteira</Title>
