@@ -66,7 +66,7 @@ export const LegendContainer = styled.ul`
     background-color: ${props => props.theme.colors.tertiary};
   }
 
-  @media(max-width: 1345px){
+  @media(max-width: 345px){
     display: flex;
     flex-direction: column;
   }
@@ -114,8 +114,8 @@ export const SideRight = styled.main`
   display: flex;
   flex: 1;
   justify-content: center;
-  
-  @media(max-width: 1345px){
+
+  @media(max-width: 345px){
     height: 100%;
   }
 `;
