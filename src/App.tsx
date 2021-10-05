@@ -6,7 +6,6 @@ import GlobalStyles from "./styles/GlobalStyles";
 import { useTheme } from "./hooks/theme";
 
 import Routes from "./routes";
-import dark from "./styles/themes/dark";
 
 const src: React.FC = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Container, ToggleLabel, ToggleSelector } from "./styles";
 
@@ -15,8 +15,6 @@ const Toggle: React.FC<IToggleProps> = ({
   checked,
   onChange,
 }) => {
-  const [status, setStatus] = useState(false);
-
   return (
     <Container>
       <ToggleLabel>{labelLeft}</ToggleLabel>
