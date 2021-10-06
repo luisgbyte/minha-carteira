@@ -7,7 +7,10 @@ The purpose of this project is to be a dashboard that allows users to manage the
 For this, several graphs are used that calculate the balance, presenting the status as negative, positive or neutral.
 The development took place following the best practices of clean code and division of responsibilities using ReactJS with TypeScript.
 
-## :eyes: Preview App 
+## :eyes: Preview App
+<img src="https://github.com/luisgbyte/my-wallet/blob/main/dashboard_dark.png" />
+<img src="https://github.com/luisgbyte/my-wallet/blob/main/dashboard_light.png" />
+
 ## :bulb: Features
 :white_check_mark: Authentication <br/>
 :white_check_mark: Responsiveness <br/>
